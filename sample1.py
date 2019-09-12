@@ -14,10 +14,8 @@ import csv
 
 
 
-username="v-mosaip@microsoft.com"
-
-password=""
-driver = webdriver.Chrome(r'C:\Python3.7\chromedriver.exe')
+#driver = webdriver.Chrome(r'C:\Python3.7\chromedriver.exe')
+driver=webdriver.Chrome(r'/home/mohan/Downloads/chromedriver')
 #driver.implicitly_wait()
 #kaizala_web1 = "https://manage.kaiza.la"
 page     = "https://www.youtube.com"
@@ -26,6 +24,23 @@ page     = "https://www.youtube.com"
 driver.get(page)
 driver.maximize_window()
 
+
+
+def  scroll_down_page():
+    print("scrollDownPage")
+    time.sleep(20)
+    try:
+      scrolls = 4
+      while True:
+        time.sleep(10)
+        scrolls -= 1
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+        print("started scrolling down")
+        time.sleep(3)
+        if scrolls < 0:
+            break
+    except:
+        print("failed to scroll down the page")
 
 def get_LisMenuInfo(driver):
     time.sleep(30)
@@ -41,6 +56,9 @@ def get_LisMenuInfo(driver):
     try:
         driver.find_element_by_xpath(mystring).click()
         print("working")
+        time.sleep(30)
+        # this for scrolling the current page need to supprate  as function
+
     except:
         print("failed to validate")
 
@@ -89,3 +107,6 @@ select_channel(driver)
 #getHomeVideos(driver) # Pending
 
 get_LisMenuInfo(driver)
+
+
+scroll_down_page()
