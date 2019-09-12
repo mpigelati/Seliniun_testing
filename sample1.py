@@ -13,6 +13,7 @@ import pandas as pd
 import csv
 
 
+#Note while Running program chang Chrome Driver path
 
 #driver = webdriver.Chrome(r'C:\Python3.7\chromedriver.exe')
 driver=webdriver.Chrome(r'/home/mohan/Downloads/chromedriver')
