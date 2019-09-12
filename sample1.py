@@ -27,7 +27,7 @@ driver.maximize_window()
 def find_videos(driver):
     video_path='//*[@id="contents"]/ytd-grid-renderer/div/ytd-grid-video-renderer'
     #driver.find_element_by_xpath('')
-    print(len(driver.find_elements_by_xpath(video_path)))
+    print("Counting length",len(driver.find_elements_by_xpath(video_path)))
 
 def  scroll_down_page():
     print("scrollDownPage")
