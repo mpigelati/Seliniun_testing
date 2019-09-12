@@ -24,7 +24,10 @@ page     = "https://www.youtube.com"
 driver.get(page)
 driver.maximize_window()
 
-
+def find_videos(driver):
+    video_path='//*[@id="contents"]/ytd-grid-renderer/div/ytd-grid-video-renderer'
+    #driver.find_element_by_xpath('')
+    print(len(driver.find_elements_by_xpath(video_path)))
 
 def  scroll_down_page():
     print("scrollDownPage")
@@ -32,15 +35,15 @@ def  scroll_down_page():
     try:
       scrolls = 4
       while True:
-        time.sleep(10)
         scrolls -= 1
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
         print("started scrolling down")
-        time.sleep(3)
+        time.sleep(5)
         if scrolls < 0:
             break
     except:
         print("failed to scroll down the page")
+
 
 def get_LisMenuInfo(driver):
     time.sleep(30)
@@ -56,8 +59,7 @@ def get_LisMenuInfo(driver):
     try:
         driver.find_element_by_xpath(mystring).click()
         print("working")
-        time.sleep(30)
-        # this for scrolling the current page need to supprate  as function
+        print("Before Creating Group_Bulk_Upload",driver.current_url)
 
     except:
         print("failed to validate")
@@ -99,7 +101,6 @@ def search_step_Forum(driver):
 
 
 
-
 search_step_Forum(driver) # searching for STeP-IN Forum page
 
 select_channel(driver)
@@ -108,5 +109,5 @@ select_channel(driver)
 
 get_LisMenuInfo(driver)
 
-
-scroll_down_page()
+find_videos(driver)
+#scroll_down_page(driver) Need to check the function for scroling down the web page
