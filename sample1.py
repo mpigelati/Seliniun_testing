@@ -15,8 +15,8 @@ import csv
 
 #Note while Running program chang Chrome Driver path
 
-#driver = webdriver.Chrome(r'C:\Python3.7\chromedriver.exe')
-driver=webdriver.Chrome(r'/home/mohan/Downloads/chromedriver')
+driver = webdriver.Chrome(r'C:\Python3.7\chromedriver.exe')
+#driver=webdriver.Chrome(r'/home/mohan/Downloads/chromedriver')
 #driver.implicitly_wait()
 #kaizala_web1 = "https://manage.kaiza.la"
 page     = "https://www.youtube.com"
@@ -25,10 +25,14 @@ page     = "https://www.youtube.com"
 driver.get(page)
 driver.maximize_window()
 
-def find_videos(driver):
-    video_path='//*[@id="contents"]/ytd-grid-renderer/div/ytd-grid-video-renderer'
+def videosTag(driver):
+    print("4:--> videosTag Function")
+    time.sleep(20)
+    mylist='//*[@id="contents"]/ytd-grid-renderer/div/ytd-grid-video-renderer'
+    print("Videoslist ", len(driver.find_elements_by_xpath(mylist)))  #
+    #length = len(driver.find_elements_by_xpath(mylist))
     #driver.find_element_by_xpath('')
-    print("Counting length",len(driver.find_elements_by_xpath(video_path)))
+    #print("Counting length",len(driver.find_elements_by_xpath(video_path)))
 
 def  scroll_down_page():
     print("scrollDownPage")
@@ -47,7 +51,8 @@ def  scroll_down_page():
 
 
 def get_LisMenuInfo(driver):
-    time.sleep(30)
+    print("3:-->get_LisMenuInfo Function")
+    time.sleep(20)
     print("get list Menu info")
     list_menu= '//*[@id="tabsContainer"]'
     mylist='//*[@id="tabsContainer"]/div/paper-tab'
@@ -66,6 +71,7 @@ def get_LisMenuInfo(driver):
         print("failed to validate")
 
 """
+    Need to improve code for listing all the Menu in youtube
     for count in range(1,length):
         mystring = mylist + '[' + str(count) + ']/div'
         data1= driver.find_elements_by_xpath(mystring)
@@ -76,26 +82,26 @@ def get_LisMenuInfo(driver):
 
 def getHomeVideos(driver):
     print("get list of names for videos")
-    time.sleep(30)
+    time.sleep(20)
     #path1='//*[@id="page-manager"]/ytd-search/div/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer[1]/div[2]/ytd-item-section-renderer/div[3]'
     video_path = '//*[@id="contents"]/yt-horizontal-list-renderer/div[2]/div'
     print("length",len(driver.find_elements_by_xpath(video_path)))
 
 
 def select_channel(driver):
-    print("chennel select")
+    print("2:-->select_channel Function")
     path= '//*[@id="page-manager"]/ytd-search/div/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer[1]/div[2]/ytd-item-section-renderer/div[3]/ytd-channel-renderer/a/div[2]/ytd-channel-name/div[1]/div/yt-formatted-string'
-    time.sleep(30)
+    time.sleep(20)
     try:
         driver.find_element_by_xpath(path).click()
 
     except:
-        print("failed to select chennel")
+        print("2-->failed to select chennel")
     # driver.find_element_by_id("text").click()
 
 
 def search_step_Forum(driver):
-    print("searching-STeP-IN Forum")
+    print("1:-->searching-STeP-IN Forum Function")
 
     driver.find_element_by_id("search").send_keys("STeP-IN Forum")
     driver.find_element_by_xpath("//*[@id='search-icon-legacy']/yt-icon").click()
@@ -110,5 +116,5 @@ select_channel(driver)
 
 get_LisMenuInfo(driver)
 
-find_videos(driver)
+videosTag(driver)
 #scroll_down_page(driver) Need to check the function for scroling down the web page
