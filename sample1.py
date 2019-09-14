@@ -15,8 +15,8 @@ import csv
 
 #Note while Running program chang Chrome Driver path
 
-driver = webdriver.Chrome(r'C:\Python3.7\chromedriver.exe')
-#driver=webdriver.Chrome(r'/home/mohan/Downloads/chromedriver')
+#driver = webdriver.Chrome(r'C:\Python3.7\chromedriver.exe')
+driver=webdriver.Chrome(r'/home/mohan/Downloads/chromedriver')
 #driver.implicitly_wait()
 #kaizala_web1 = "https://manage.kaiza.la"
 page     = "https://www.youtube.com"
@@ -27,9 +27,33 @@ driver.maximize_window()
 
 def videosTag(driver):
     print("4:--> videosTag Function")
-    time.sleep(20)
+    time.sleep(10)
     mylist='//*[@id="contents"]/ytd-grid-renderer/div/ytd-grid-video-renderer'
-    print("Videoslist ", len(driver.find_elements_by_xpath(mylist)))  #
+    time_count=mylist+"[1]/div/ytd-thumbnail/a/div[1]/ytd-thumbnail-overlay-time-status-renderer"
+    videoName=mylist+"[1]/div/div[1]/div/h3/a"
+
+
+    videosCount = len(driver.find_elements_by_xpath(mylist))
+    print("4--->VideosCount", videosCount)
+
+    #====================================================================================
+    #logic need to Devlop for getting all the links
+    #===================================================================================
+    # for count in range(1,videosCount): Need to implement function  to
+    print("time_count",time_count)
+    print("4:--->time",driver.find_element_by_xpath(time_count).text)
+    print("4:--->videoName",driver.find_element_by_xpath(videoName).text)
+    videoName1=driver.find_element_by_xpath(videoName).text
+    links= driver.find_element_by_xpath(videoName).get_attribute('href')
+    print("4:--->videolink",links)
+
+    #print(driver.find_element_by_xpath(videoName))
+    #print(driver)
+    #print("Videoslist ", len(driver.find_elements_by_xpath(mylist)))  #
+
+
+
+
     #length = len(driver.find_elements_by_xpath(mylist))
     #driver.find_element_by_xpath('')
     #print("Counting length",len(driver.find_elements_by_xpath(video_path)))
@@ -53,19 +77,19 @@ def  scroll_down_page():
 def get_LisMenuInfo(driver):
     print("3:-->get_LisMenuInfo Function")
     time.sleep(20)
-    print("get list Menu info")
+
     list_menu= '//*[@id="tabsContainer"]'
     mylist='//*[@id="tabsContainer"]/div/paper-tab'
     #print("lengthListMenu", len(driver.find_elements_by_xpath(list_menu)))
-    print("lengthListMenu", len(driver.find_elements_by_xpath(mylist))) #
+    print("3:--->lengthListMenu", len(driver.find_elements_by_xpath(mylist))) #
     length= len(driver.find_elements_by_xpath(mylist))
 
     # Need to reduce code once basic code working
     mystring = mylist + '[' + str(2) + ']/div'
     try:
         driver.find_element_by_xpath(mystring).click()
-        print("working")
-        print("Before Creating Group_Bulk_Upload",driver.current_url)
+        print("3:--->working")
+        print("3:--->Before Creating Group_Bulk_Upload",driver.current_url)
 
     except:
         print("failed to validate")
