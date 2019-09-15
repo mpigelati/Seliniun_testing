@@ -27,7 +27,7 @@ driver.maximize_window()
 
 def videosTag(driver):
     print("4:--> videosTag Function")
-
+    J_data = []
     dataList=[]
     time.sleep(10)
     mylist='//*[@id="contents"]/ytd-grid-renderer/div/ytd-grid-video-renderer'
@@ -55,6 +55,16 @@ def videosTag(driver):
     print("4:--->videolink",links)
     dataList.append(links)
     print("dataList",dataList)
+
+    J_data.append(
+        {
+            'Name': dataList[0],
+            'Time': dataList[1],
+            'Video_Link': dataList[2],
+
+        }
+    )
+    print("Jsonfile",J_data)
     #print(driver.find_element_by_xpath(videoName))
     #print(driver)
     #print("Videoslist ", len(driver.find_elements_by_xpath(mylist)))  #
