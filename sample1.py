@@ -27,6 +27,8 @@ driver.maximize_window()
 
 def videosTag(driver):
     print("4:--> videosTag Function")
+
+    dataList=[]
     time.sleep(10)
     mylist='//*[@id="contents"]/ytd-grid-renderer/div/ytd-grid-video-renderer'
     time_count=mylist+"[1]/div/ytd-thumbnail/a/div[1]/ytd-thumbnail-overlay-time-status-renderer"
@@ -35,18 +37,24 @@ def videosTag(driver):
 
     videosCount = len(driver.find_elements_by_xpath(mylist))
     print("4--->VideosCount", videosCount)
-
-    #====================================================================================
-    #logic need to Devlop for getting all the links
-    #===================================================================================
     # for count in range(1,videosCount): Need to implement function  to
-    print("time_count",time_count)
-    print("4:--->time",driver.find_element_by_xpath(time_count).text)
-    print("4:--->videoName",driver.find_element_by_xpath(videoName).text)
-    videoName1=driver.find_element_by_xpath(videoName).text
+
+
+    #print("4:--->time",driver.find_element_by_xpath(time_count).text)
+    Time_stamp= driver.find_element_by_xpath(time_count).text
+
+    Video_name = driver.find_element_by_xpath(videoName).text
+    print("4:--->videoName", Video_name)
+    dataList.append(Video_name)
+
+    print("4:--->time",Time_stamp)
+    dataList.append(Time_stamp)
+    #print("4:--->videoName",driver.find_element_by_xpath(videoName).text)
+
     links= driver.find_element_by_xpath(videoName).get_attribute('href')
     print("4:--->videolink",links)
-
+    dataList.append(links)
+    print("dataList",dataList)
     #print(driver.find_element_by_xpath(videoName))
     #print(driver)
     #print("Videoslist ", len(driver.find_elements_by_xpath(mylist)))  #
@@ -57,6 +65,8 @@ def videosTag(driver):
     #length = len(driver.find_elements_by_xpath(mylist))
     #driver.find_element_by_xpath('')
     #print("Counting length",len(driver.find_elements_by_xpath(video_path)))
+
+
 
 def  scroll_down_page():
     print("scrollDownPage")
